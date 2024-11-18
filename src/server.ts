@@ -3,13 +3,15 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import employeesRouter from './routes'
 import { connect } from './config/db'
+import cors from 'cors'
+import { corsConfig } from './config/cors'
 
 dotenv.config()
 connect()
 
 const app = express()
 
-/* Aqui habilitar CORS cuando llegue el momento */
+app.use(cors(corsConfig)) // Habilitar CORS
 app.use(morgan('dev'))
 app.use(express.json())
 
