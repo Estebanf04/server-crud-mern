@@ -11,7 +11,7 @@ connect()
 
 const app = express()
 
-app.use(cors(corsConfig)) // Habilitar CORS
+app.use(cors()) // Habilitar CORS
 app.use(morgan('dev'))
 app.use(express.json())
 
