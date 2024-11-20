@@ -21,7 +21,7 @@ export class Validations{
                 .isEmail().withMessage('El email debe tener un formato valido'),
             body('phone')
                 .notEmpty().withMessage('El numero de telefono del empleado es obligatorio')
-                .isMobilePhone('es-ES').withMessage('El numero de telefono debe tener un formato valido'),
+                .isLength({min: 9, max: 9}).withMessage('El numero de telefono debe tener un formato valido'),
             body('job')
                 .notEmpty().withMessage('El puesto de trabajo del empleado es obligatorio')
                 .isString().withMessage('El puesto de trabajo debe ser un string'),

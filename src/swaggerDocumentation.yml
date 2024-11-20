@@ -1,0 +1,167 @@
+tags:
+  - name: Employee
+paths:
+  /api/employees:
+    get:
+      tags:
+        - Employee
+      summary: Get all employees
+      description: Get all employees from the list
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                 type: array
+                 items:
+                    $ref: '#/components/schemas/EmployeeServerResponse'
+        '400':
+          description: An error has been found
+    post:
+      tags:
+        - Employee
+      summary: Create an employee
+      description: Create a new employee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeCreateOrUpdate'
+        required: true
+      responses:
+        '201':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/EmployeeServerResponse'
+        '400':
+            description: An error has been found
+  /api/employees/{employeeID}:
+    get:
+      tags:
+        - Employee
+      summary: Get one employee
+      description: Get employee information by an employeeID
+      parameters:
+        - name: employeeID
+          in: path
+          description: ID of employee to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeServerResponse'
+        '400':
+          description: An error has been found
+        '404':
+          description: Employee not found
+    delete:
+      tags:
+        - Employee
+      summary: Delete an employee
+      description: Delete one employee
+      parameters:
+        - name: employeeID
+          in: path
+          description: ID of employee to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Succesful operation
+        '400':
+          description: An error has been found
+        '404':
+          description: Employee not found
+    put:
+      tags:
+        - Employee
+      summary: Update an employee
+      description: Edit the employee information.
+      parameters:
+        - name: employeeID
+          in: path
+          description: ID of employee to edit
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeCreateOrUpdate'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeServerResponse'
+        '400':
+          description: An error has been found
+        '404':
+          description: Employee not found
+components:
+  schemas:
+    EmployeeCreateOrUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Esteban
+        surname:
+          type: string
+          example: Fandos
+        email:
+          type: string
+          example: contacto@estebanfandos.com
+        phone:
+          type: string
+          example: 677222888
+        job:
+          type: string
+          example: Software Developer
+        contractHours:
+          type: number
+          example: 40
+    EmployeeServerResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 672ceb1d582e04ba6a4c2dab
+        name:
+          type: string
+          example: Esteban
+        surname:
+          type: string
+          example: Fandos
+        email:
+          type: string
+          example: contacto@estebanfandos.com
+        phone:
+          type: string
+          example: 677222888
+        job:
+          type: string
+          example: Software Developer
+        contractHours:
+          type: number
+          example: 40
+        createdAt:
+          type: string
+          example: 2024-10-11T19:47:25.893Z
+        updatedAt:
+          type: string
+          example: 2024-10-11T19:47:25.893Z
+        __v:
+          type: number
+          example: 0
